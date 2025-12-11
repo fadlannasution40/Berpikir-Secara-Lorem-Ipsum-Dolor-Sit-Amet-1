@@ -175,3 +175,23 @@ begin
   until false;
   inputJarak := j;
 end;
+
+function inputBahanBakar: real;
+var b: real;
+begin
+  repeat
+    write('Masukkan bahan bakar terpakai (liter) : '); readln(b);
+    if b <= 0 then begin writeln('Bahan bakar harus > 0! ENTER untuk ulangi...'); readln; end
+    else break;
+  until false;
+  inputBahanBakar := b;
+end;
+
+function kategoriEfisiensi(kmpl: real): string;
+begin
+  if kmpl >= 15 then kategoriEfisiensi := 'Sangat Efisien'
+  else if kmpl >= 10 then kategoriEfisiensi := 'Cukup Efisien'
+  else kategoriEfisiensi := 'Boros';
+end;
+
+
