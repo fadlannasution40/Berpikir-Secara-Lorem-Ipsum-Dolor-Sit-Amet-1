@@ -1,8 +1,17 @@
-program tes;
+program AnalisisBahanBakar;
 uses crt;
-begin
-clrscr;
-write('Tes');
-
-writeln('hello world');
-end.
+type
+ Kendaraan = record
+ jenisKendaraan : string;
+ merek : string;
+ ccmesin : integer;
+ jenisBBM : string;
+ hari : integer;
+ jam : integer;
+ bahanbakar: real;
+ harga : real;
+ konsumsi : real;
+ biaya : real;
+ waktuperliterjam : real;
+ waktuperlitermenit: real;
+ kategoricc :
