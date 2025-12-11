@@ -194,4 +194,29 @@ begin
   else kategoriEfisiensi := 'Boros';
 end;
 
+procedure inputData(var k: kendaraan);
+var totalJam: real;
+begin
+  clrscr;
+  writeln('--- INPUT DATA PERJALANAN ---');
+  k.jenisKendaraan := inputJenisKendaraan;
+  k.merek := inputMerek(k.jenisKendaraan);
+  k.ccMesin := inputCC;
+  k.kategoriCC := analisisCC(k.ccMesin);
+  k.jenisBBM := inputBBM(k.harga);
+  k.hari := inputHari;
+  k.jam := inputJam;
+  k.jarak := inputJarak;
+  k.bahanBakar := inputBahanBakar;
+
+  k.konsumsi := k.jarak / k.bahanBakar;
+  k.biaya := k.bahanBakar * k.harga;
+
+  totalJam := (k.hari * 24) + k.jam;
+  k.waktuPerLiterJam := totalJam / k.bahanBakar;
+  k.waktuPerLiterMenit := k.waktuPerLiterJam * 60;
+
+
+  k.kategoriEfisiensi := kategoriEfisiensi(k.konsumsi);
+end;
 
