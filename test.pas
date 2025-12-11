@@ -211,7 +211,12 @@ begin
 
   k.konsumsi := k.jarak / k.bahanBakar;
   k.biaya := k.bahanBakar * k.harga;
+  totalJam := (k.hari * 24) + k.jam;
+  k.waktuPerLiterJam := totalJam / k.bahanBakar;
+  k.waktuPerLiterMenit := k.waktuPerLiterJam * 60;
 
+
+  k.kategoriEfisiensi := kategoriEfisiensi(k.konsumsi);
  
 end;
 
