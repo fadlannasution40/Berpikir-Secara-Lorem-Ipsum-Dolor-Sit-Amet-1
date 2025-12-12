@@ -184,3 +184,52 @@ begin
 
   k.kategoriEfisiensi := kategoriEfisiensi(k.konsumsi);
 end;
+
+procedure tampilSemua;
+begin
+  clrscr;
+  writeln('=== DAFTAR ANALISIS PERJALANAN ===');
+  if n = 0 then begin writeln('Belum ada data.'); readln; exit; end;
+  for i := 1 to n do begin
+    with daftar[i] do begin
+      writeln('Perjalanan ', i, ':');
+      writeln('  Jenis kendaraan : ', jenisKendaraan);
+      writeln('  Merek           : ', merek);
+      writeln('  CC mesin        : ', ccMesin, ' cc');
+      writeln('  Analisis CC     : ', kategoriCC);
+      writeln('  Jenis BBM       : ', jenisBBM, ' (Rp', harga:0:0, '/liter)');
+      writeln('  Lama perjalanan : ', hari, ' hari ', jam, ' jam');
+      writeln('  Jarak           : ', jarak:0:2, ' km');
+      writeln('  Bahan Bakar     : ', bahanBakar:0:2, ' liter');
+      writeln('  Konsumsi        : ', konsumsi:0:2, ' km/liter');
+      writeln('  Waktu per liter : ', waktuPerLiterJam:0:2, ' jam (', waktuPerLiterMenit:0:0, ' menit)');
+      writeln('  Biaya           : Rp', biaya:0:0);
+      writeln('  Efisiensi       : ', kategoriEfisiensi);
+      writeln;
+    end;
+  end;
+  writeln('Total data: ', n);
+  writeln('Tekan ENTER untuk kembali...'); readln;
+end;
+
+procedure hapusData;
+var idx: integer;
+begin
+  clrscr;
+  if n = 0 then begin writeln('Belum ada data untuk dihapus.'); readln; exit; end;
+  writeln('=== HAPUS DATA PERJALANAN ===');
+  for i := 1 to n do
+    writeln(i, '. ', daftar[i].jenisKendaraan, ' - ', daftar[i].merek,
+            ' - ', daftar[i].jenisBBM, ' - Jarak: ', daftar[i].jarak:0:2, ' km');
+  writeln;
+  write('Masukkan nomor perjalanan yang ingin dihapus (1-', n, '): ');
+  readln(idx);
+  if (idx < 1) or (idx > n) then begin
+    writeln('Nomor tidak valid! Tekan ENTER...'); readln; exit;
+  end;
+  if idx < n then
+    Move(daftar[idx+1], daftar[idx], (n-idx)*SizeOf(kendaraan));
+  dec(n);
+  writeln('Data perjalanan ke-', idx, ' berhasil dihapus.');
+  writeln('Tekan ENTER...'); readln;
+end;
