@@ -233,3 +233,49 @@ begin
   writeln('Data perjalanan ke-', idx, ' berhasil dihapus.');
   writeln('Tekan ENTER...'); readln;
 end;
+procedure tampilMenu(p: integer);
+begin
+  clrscr;
+  writeln('=== MENU UTAMA ===');
+  if p = 1 then writeln('> Input Data Kendaraan') else writeln('  Input Data Kendaraan');
+  if p = 2 then writeln('> Tampilkan Semua Data') else writeln('  Tampilkan Semua Data');
+  if p = 3 then writeln('> Hapus Data') else writeln('  Hapus Data');
+  if p = 4 then writeln('> Keluar') else writeln('  Keluar');
+end;
+
+begin
+  n := 0;
+  pos := 1;
+  repeat
+    tampilMenu(pos);
+    tombol := readkey;
+    if tombol = #0 then begin
+      tombol := readkey;
+      case tombol of
+        #75: if pos > 1 then dec(pos) else pos := 4; 
+        #77: if pos < 4 then inc(pos) else pos := 1; 
+      end;
+    end else if tombol = #13 then begin
+      case pos of
+        1: begin
+             if n < 20 then begin
+               inc(n);
+               inputData(daftar[n]);
+               writeln('Analisis berhasil dicatat! Tekan ENTER...');
+               readln;
+             end else begin
+               writeln('Data penuh (maks 20)! Tekan ENTER...');
+               readln;
+             end;
+           end;
+        2: tampilSemua;
+        3: hapusData;
+          4: begin
+             clrscr;
+             writeln('Terima kasih telah menggunakan sistem analisis bahan bakar.');
+             halt(0);
+           end;
+      end;
+    end;
+  until false;
+end.
